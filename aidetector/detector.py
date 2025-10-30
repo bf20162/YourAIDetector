@@ -54,10 +54,17 @@ class AIContentDetector:
             r'\bas a result\b',
             r'\bon the other hand\b',
             r'\bfrom this perspective\b',
+            r'\bsubsequently\b',
         ]
         
         # Compile patterns for efficiency
         self.compiled_patterns = [re.compile(pattern, re.IGNORECASE) for pattern in self.ai_patterns]
+        
+        # Extract formal transition words for use in segment detection
+        self.formal_words = [
+            'furthermore', 'moreover', 'additionally', 'consequently',
+            'therefore', 'nevertheless', 'subsequently'
+        ]
     
     def analyze(self, text: str) -> Dict[str, Any]:
         """
@@ -305,10 +312,8 @@ class AIContentDetector:
                     sentence_score += 0.15
                     reasons.append("Uniform word length")
             
-            # Check for overly formal language
-            formal_words = ['furthermore', 'moreover', 'additionally', 'consequently', 
-                          'therefore', 'nevertheless', 'subsequently']
-            if any(word in sentence.lower() for word in formal_words):
+            # Check for overly formal language using shared list
+            if any(word in sentence.lower() for word in self.formal_words):
                 sentence_score += 0.15
                 reasons.append("Formal transition word")
             

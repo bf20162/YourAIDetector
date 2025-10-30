@@ -58,11 +58,11 @@ class DocumentParser:
     def _parse_pdf(self, file_path: str) -> Dict[str, Any]:
         """Parse PDF file and extract text."""
         try:
-            import PyPDF2
+            from pypdf import PdfReader
             
             text_content = []
             with open(file_path, 'rb') as file:
-                pdf_reader = PyPDF2.PdfReader(file)
+                pdf_reader = PdfReader(file)
                 num_pages = len(pdf_reader.pages)
                 
                 for page_num in range(num_pages):
@@ -78,7 +78,7 @@ class DocumentParser:
                 'file_path': file_path
             }
         except ImportError:
-            logger.error("PyPDF2 not installed. Install with: pip install PyPDF2")
+            logger.error("pypdf not installed. Install with: pip install pypdf")
             raise
         except Exception as e:
             logger.error(f"Error parsing PDF: {e}")

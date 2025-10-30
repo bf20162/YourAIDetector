@@ -26,6 +26,15 @@ class TextHighlighter:
         'END': '\033[0m'
     }
     
+    # HTML color codes for report generation
+    HTML_COLORS = {
+        'HIGH': '#ff6b6b',     # Red for high suspicion
+        'MEDIUM': '#ffd93d',   # Yellow for medium suspicion
+        'LOW': '#6bcf7f',      # Green for low suspicion
+        'STATUS_AI': '#ff6b6b',      # Red for AI-generated status
+        'STATUS_HUMAN': '#6bcf7f'    # Green for human-written status
+    }
+    
     def __init__(self, use_colors: bool = True):
         """
         Initialize the text highlighter.
@@ -118,13 +127,13 @@ class TextHighlighter:
             
             # Determine color based on score
             if score >= 0.7:
-                color = '#ff6b6b'  # Red
+                color = self.HTML_COLORS['HIGH']
                 intensity = 'high'
             elif score >= 0.5:
-                color = '#ffd93d'  # Yellow
+                color = self.HTML_COLORS['MEDIUM']
                 intensity = 'medium'
             else:
-                color = '#6bcf7f'  # Green
+                color = self.HTML_COLORS['LOW']
                 intensity = 'low'
             
             original_segment = text[pos:pos + length]
@@ -146,7 +155,7 @@ class TextHighlighter:
             )
         
         # Generate full HTML report
-        status_color = '#ff6b6b' if is_ai else '#6bcf7f'
+        status_color = self.HTML_COLORS['STATUS_AI'] if is_ai else self.HTML_COLORS['STATUS_HUMAN']
         status_text = 'LIKELY AI-GENERATED' if is_ai else 'LIKELY HUMAN-WRITTEN'
         
         html_report = f"""

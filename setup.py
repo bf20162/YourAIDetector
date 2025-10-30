@@ -39,7 +39,7 @@ setup(
         'torch>=2.0.0',
         'numpy>=1.24.0',
         'scipy>=1.10.0',
-        'PyPDF2>=3.0.0',
+        'pypdf>=3.15.0',
         'python-docx>=0.8.11',
         'pytesseract>=0.3.10',
         'Pillow>=9.5.0',

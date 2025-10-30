@@ -143,7 +143,7 @@ def analyze_text(text: str, threshold: float = 0.5,
     detector = AIContentDetector(threshold=threshold)
     
     try:
-        result = analyzer = detector.analyze(text)
+        result = detector.analyze(text)
         print("✓ Analysis complete\n")
         
     except Exception as e:
