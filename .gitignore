@@ -58,3 +58,7 @@ temp/
 models/*.bin
 models/*.pt
 models/*.pth
+
+# Generated HTML reports (exclude from repo)
+*.html
+!docs/*.html
