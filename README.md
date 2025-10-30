@@ -1,0 +1,2 @@
+# YourAIDetector
+AI Detection Tool
